@@ -1,13 +1,15 @@
+
 GET http://localhost:4000/loan
 ###
 POST http://localhost:4000/loan/calculate
+Content-Type: application/json
 
-content-type: application/json,
 {
-  "loanAmount": 100000,
-  "interestRate": 0.05,
-  "repaymentPeriodYears": 20
+  "loanAmount": 560000,
+  "interestRate": 3.5,
+  "repaymentPeriodYears": 50
 }
+
 
 ###
 GET http://localhost:5215/todos/2

@@ -26,7 +26,7 @@ var app = builder.Build();
 app.UseCors("ReactCorsPolicy");
 
 // Use middlewares for logging and rewriting
-app.UseRewriter(new RewriteOptions().AddRedirect("tasks/(.*)", "todos/$1"));
+// app.UseRewriter(new RewriteOptions().AddRedirect("tasks/(.*)", "todos/$1"));
 app.Use(async (context, next) => {
     Console.WriteLine($"[{context.Request.Method} {context.Request.Path} {DateTime.UtcNow}] Started.");
     await next();
@@ -70,9 +70,8 @@ public class LoanService : ILoanService
 {
     public decimal CalculateMonthlyPayment(LoanRequest request)
     {
-        // Perform loan calculation logic here
         // For demonstration purposes, a simple calculation is used
-        decimal monthlyInterestRate = request.InterestRate / 12;
+        decimal monthlyInterestRate = request.InterestRate / 12 / 100;
         int totalPayments = request.RepaymentPeriodYears * 12;
         decimal monthlyPayment = (request.LoanAmount * monthlyInterestRate) /
                                   (1 - (decimal)Math.Pow(1 + (double)monthlyInterestRate, -totalPayments));
